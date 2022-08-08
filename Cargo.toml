@@ -1,0 +1,9 @@
+[package]
+name = "cardmod-rust"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+uuid = { version = "1.1.2", features = ["v4", "fast-rng"]}
+serde_json = "1.0.64"
+serde = { version = "1.0.126", features = ["derive"] }
