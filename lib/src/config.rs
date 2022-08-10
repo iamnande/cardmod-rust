@@ -82,11 +82,11 @@ pub fn new() -> Config {
     };
 
     // new: return constructed 
-    return Config{
+    Config{
         environment: environment,
         server: Server {
             port: server_port,
         }
-    };
+    }
 
 }

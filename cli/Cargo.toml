@@ -1,0 +1,17 @@
+[package]
+name = "cardmod_cli"
+version = "1.0.0"
+authors = ["iamnande"]
+edition = "2021"
+
+[[bin]]
+name = "cardmod"
+
+[dependencies]
+cardmod_lib = { path = "../lib" }
+
+# // SERVER STUFF //
+# futures = { version = "0.3" }
+# serde_json = { version = "1.0.64" }
+# tokio = { version = "1", features = ["full"] }
+# hyper = { version = "0.14", features = ["full"] }
