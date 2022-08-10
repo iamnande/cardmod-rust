@@ -1,7 +1,7 @@
-extern crate cardmod_lib;
+extern crate cardmod;
 
-use cardmod_lib::config;
-use cardmod_lib::repositories::cards;
+use cardmod::config;
+use cardmod::repositories::cards;
 
 fn main() {
 

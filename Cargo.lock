@@ -3,18 +3,18 @@
 version = 3
 
 [[package]]
-name = "cardmod_cli"
-version = "1.0.0"
-dependencies = [
- "cardmod_lib",
-]
-
-[[package]]
-name = "cardmod_lib"
+name = "cardmod"
 version = "1.0.0"
 dependencies = [
  "serde",
  "uuid",
+]
+
+[[package]]
+name = "cardmod_cli"
+version = "1.0.0"
+dependencies = [
+ "cardmod",
 ]
 
 [[package]]

@@ -1,5 +1,5 @@
 [package]
-name = "cardmod_lib"
+name = "cardmod"
 version = "1.0.0"
 authors = ["iamnande"]
 edition = "2021"
