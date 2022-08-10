@@ -6,6 +6,11 @@ pub struct Repository {
     cards: Vec<card::Card>,
 }
 
+#[derive(Debug)]
+pub enum Error {
+    NotFound,
+  }
+
 impl Repository {
 
     // Creates a new instance of a card repository.
@@ -19,13 +24,21 @@ impl Repository {
     }
 
     // get single
-    pub fn describe(&self, name: &str) -> &card::Card {
+    pub fn describe(&self, name: &str) -> Result<&card::Card, Error> {
+        let mut res: Option<&card::Card> = None;
         for i in 0..self.cards.len() {
             if self.cards[i].name == name.to_string() {
-                return self.cards.get(i).unwrap();
+                res = self.cards.get(i);
             }
         }
-        self.cards.get(0).unwrap()
+        match res {
+            Some(card) => {
+                Ok(card)
+            }
+            None => {
+                Err(Error::NotFound)
+            }
+        }
     }
 
 }

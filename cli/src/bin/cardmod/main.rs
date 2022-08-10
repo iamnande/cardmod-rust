@@ -11,7 +11,12 @@ fn main() {
 
     // cardmod: test repository
     let repo = cards::Repository::new();
-    let card = repo.describe("MiniMog");
-    println!("card - name:'{}' level:'{}'", card.name, card.level);
-
+    match repo.describe("MiniMog") {
+        Ok(card)  => {
+            println!("card - name:'{}' level:'{}'", card.name, card.level);
+        },
+        Err(e) => {
+            panic!("{:?}", e)
+        },
+    };
 }
