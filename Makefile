@@ -33,6 +33,6 @@ build-binary: build-clean ## build: build release binary file
 # --------------------------------------------------
 
 .PHONY: test-lint
-test-lint: ## test: build debug binary file
+test-lint: ## test: checking for lint failures
 	@echo $(APP_LOG_FMT) "building debug binary"
-	@cargo c
+	@find . -type f -name "*.rs" -exec rustfmt -v '{}' +

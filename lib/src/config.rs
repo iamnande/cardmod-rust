@@ -24,46 +24,39 @@ impl fmt::Display for Environment {
 
 // Configuration holder.
 pub struct Config {
-
     // Environment name.
     pub environment: Environment,
 
     // Server specific attributes.
     pub server: Server,
-
 }
 
 // Server configuration
 pub struct Server {
-
     // Port to listen on.
     pub port: String,
-
 }
 
 // Creates a new configuration instance.
 pub fn new() -> Config {
-
     // new: load environment name
-    let environment ;
+    let environment;
     let res = env::var(format!("{}ENVIRONMENT", ENV_PREFIX));
     match res {
-        Ok(env) => {
-            match env.as_str() {
-                "dev" => {
-                    environment = Environment::Dev;
-                }
-                "prod" => {
-                    environment = Environment::Prod;
-                }
-                "local" => {
-                    environment = Environment::Local;
-                }
-                _ => {
-                    environment = DEFAULT_ENVIRONMENT;
-                }
+        Ok(env) => match env.as_str() {
+            "dev" => {
+                environment = Environment::Dev;
             }
-        }        
+            "prod" => {
+                environment = Environment::Prod;
+            }
+            "local" => {
+                environment = Environment::Local;
+            }
+            _ => {
+                environment = DEFAULT_ENVIRONMENT;
+            }
+        },
         _ => {
             environment = DEFAULT_ENVIRONMENT;
         }
@@ -81,12 +74,9 @@ pub fn new() -> Config {
         }
     };
 
-    // new: return constructed 
-    Config{
+    // new: return constructed
+    Config {
         environment: environment,
-        server: Server {
-            port: server_port,
-        }
+        server: Server { port: server_port },
     }
-
 }
