@@ -3,6 +3,7 @@ extern crate cardmod;
 use cardmod::config;
 use cardmod::repositories::cards;
 use cardmod::repositories::items;
+use cardmod::repositories::limitbreaks;
 use cardmod::repositories::magics;
 
 fn main() {
@@ -13,7 +14,10 @@ fn main() {
     let repo = cards::Repository::new();
     match repo.describe("MiniMog") {
         Ok(card) => {
-            println!("{{\"name\":\"{}\",\"level\":{}}}", card.name, card.level);
+            println!(
+                "{{\"id\":\"{}\",\"name\":\"{}\",\"level\":{}}}",
+                card.id, card.name, card.level
+            );
         }
         Err(e) => {
             println!("failed to describe card: {:?}", e)
@@ -23,7 +27,10 @@ fn main() {
     // cardmod: test card list
     let cards = repo.list();
     for card in cards {
-        println!("{{\"name\":\"{}\",\"level\":{}}}", card.name, card.level);
+        println!(
+            "{{\"id\":\"{}\",\"name\":\"{}\",\"level\":{}}}",
+            card.id, card.name, card.level
+        );
     }
 
     // cardmod: test magic describe
@@ -31,8 +38,8 @@ fn main() {
     match repo.describe("Quake") {
         Ok(magic) => {
             println!(
-                "{{\"name\":\"{}\",\"purpose\":\"{}\"}}",
-                magic.name, magic.purpose
+                "{{\"id\":\"{}\",\"name\":\"{}\",\"purpose\":\"{}\"}}",
+                magic.id, magic.name, magic.purpose
             );
         }
         Err(e) => {
@@ -44,18 +51,18 @@ fn main() {
     let magics = repo.list();
     for magic in magics {
         println!(
-            "{{\"name\":\"{}\",\"purpose\":\"{}\"}}",
-            magic.name, magic.purpose
+            "{{\"id\":\"{}\",\"name\":\"{}\",\"purpose\":\"{}\"}}",
+            magic.id, magic.name, magic.purpose
         );
     }
 
     // cardmod: test item describe
     let repo = items::Repository::new();
-    match repo.describe("Quake") {
+    match repo.describe("Fuel") {
         Ok(item) => {
             println!(
-                "{{\"name\":\"{}\",\"purpose\":\"{}\"}}",
-                item.name, item.purpose
+                "{{\"id\":\"{}\",\"name\":\"{}\",\"purpose\":\"{}\"}}",
+                item.id, item.name, item.purpose
             );
         }
         Err(e) => {
@@ -67,8 +74,31 @@ fn main() {
     let items = repo.list();
     for item in items {
         println!(
-            "{{\"name\":\"{}\",\"purpose\":\"{}\"}}",
-            item.name, item.purpose
+            "{{\"id\":\"{}\",\"name\":\"{}\",\"purpose\":\"{}\"}}",
+            item.id, item.name, item.purpose
+        );
+    }
+
+    // cardmod: test limitbreak describe
+    let repo = limitbreaks::Repository::new();
+    match repo.describe("L?Death") {
+        Ok(limitbreak) => {
+            println!(
+                "{{\"id\":\"{}\",\"name\":\"{}\"}}",
+                limitbreak.id, limitbreak.name
+            );
+        }
+        Err(e) => {
+            println!("failed to describe limitbreak: {:?}", e)
+        }
+    };
+
+    // cardmod: test limitbreak list
+    let limitbreaks = repo.list();
+    for limitbreak in limitbreaks {
+        println!(
+            "{{\"id\":\"{}\",\"name\":\"{}\"}}",
+            limitbreak.id, limitbreak.name,
         );
     }
 }
