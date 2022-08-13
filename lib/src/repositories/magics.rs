@@ -12,6 +12,13 @@ pub enum Error {
     NotFound,
 }
 
+// Default repository.
+impl Default for Repository {
+    fn default() -> Self {
+        Repository::new()
+    }
+}
+
 // Repository implementation.
 impl Repository {
     // Creates a new instance of a magic repository.
@@ -68,7 +75,7 @@ impl Repository {
             Magic::new("Pain".to_string(), Purpose::Defensive),
             Magic::new("Aura".to_string(), Purpose::Defensive),
         ];
-        Self { magics: magics }
+        Self { magics }
     }
 
     // Describe a single magic.

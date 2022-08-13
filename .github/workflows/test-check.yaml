@@ -1,0 +1,32 @@
+name: Check
+
+on: [ pull_request ]
+
+jobs:
+  Clippy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v3
+
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          components: clippy
+      
+      - name: Run Clippy
+        run: make test-clippy
+
+  Rustfmt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v3
+
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          components: clippy
+      
+      - name: Run Rustfmt
+        uses: actions-rust-lang/rustfmt@v1

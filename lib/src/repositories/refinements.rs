@@ -36,6 +36,13 @@ pub enum Error {
     NotFound,
 }
 
+// Default repository.
+impl Default for Repository {
+    fn default() -> Self {
+        Repository::new()
+    }
+}
+
 // Repository implementation.
 impl Repository {
     // Creates a new instance of a refinement repository.
@@ -170,9 +177,7 @@ impl Repository {
             // Refinement Moment #14
             // ref: https://gamefaqs.gamespot.com/ps4/266152-final-fantasy-viii-remastered/faqs/72431/final-preparations
         ];
-        Self {
-            refinements: refinements,
-        }
+        Self { refinements }
     }
 
     // List the refinements available.
@@ -182,9 +187,9 @@ impl Repository {
 
         // list: iterate and filter (if applicable)
         let refinements = self.refinements.clone();
-        for i in 0..refinements.len() {
+        for refinement in refinements {
             // list: get current refinement
-            let current = refinements[i].clone();
+            let current = refinement;
 
             match filter.clone() {
                 Some(filter) => {
@@ -199,7 +204,7 @@ impl Repository {
         }
 
         // list: return (possibly) filtered list
-        return results;
+        results
     }
 
     // Calculate the refinement based on the desired resource and quantity.
@@ -215,32 +220,30 @@ impl Repository {
         let refinements = self.list(Some(input.target));
 
         // refine: iterate and look for matching refinements
-        for i in 0..refinements.len() {
+        for refinement in refinements {
             // refine: calculate the refinement
-            let quantity = input.quantity / i64::from(refinements[i].denominator)
-                * i64::from(refinements[i].numerator);
+            let quantity = input.quantity / i64::from(refinement.denominator)
+                * i64::from(refinement.numerator);
 
             // refine: construct the refinement result
             let mut result = RefineResult {
-                source: refinements[i].source.clone(),
-                quantity: quantity,
+                source: refinement.source.clone(),
+                quantity,
                 refinements: None,
             };
 
             // calculate: do the same thing for child refinements (if applicable)
-            let child_refinements = self.list(Some(refinements[i].source.clone()));
-            for j in 0..child_refinements.len() {
-                let child_quantity = quantity * i64::from(child_refinements[j].clone().numerator);
+            let child_refinements = self.list(Some(refinement.source));
+            for child_refinement in child_refinements {
+                let child_quantity = quantity * i64::from(child_refinement.numerator);
                 let child_result = vec![RefineResult {
                     source: String::from("foo"),
                     quantity: child_quantity,
                     refinements: None,
                 }];
                 match result.refinements {
-                    Some(_) => {
-                        result.refinements = Some(child_result)
-                    }
-                    None => ()
+                    Some(_) => result.refinements = Some(child_result),
+                    None => (),
                 }
             }
 

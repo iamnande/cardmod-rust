@@ -12,6 +12,13 @@ pub enum Error {
     NotFound,
 }
 
+// Default repository.
+impl Default for Repository {
+    fn default() -> Self {
+        Repository::new()
+    }
+}
+
 // Repository implementation.
 impl Repository {
     // Creates a new instance of a item repository.
@@ -186,7 +193,7 @@ impl Repository {
             Item::new("Luck Up".to_string(), Purpose::StatBoosting),
             Item::new("LuvLuv G".to_string(), Purpose::LuvLuvG),
         ];
-        Self { items: items }
+        Self { items }
     }
 
     // Describe a single item.
