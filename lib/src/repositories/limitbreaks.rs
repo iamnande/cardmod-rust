@@ -12,6 +12,13 @@ pub enum Error {
     NotFound,
 }
 
+// Default repository.
+impl Default for Repository {
+    fn default() -> Self {
+        Repository::new()
+    }
+}
+
 // Repository implementation.
 impl Repository {
     // Creates a new instance of a limitbreak repository.
@@ -33,9 +40,7 @@ impl Repository {
             LimitBreak::new("Ray-Bomb".to_string()),
             LimitBreak::new("Shockwave Pulsar".to_string()),
         ];
-        Self {
-            limitbreaks: limitbreaks,
-        }
+        Self { limitbreaks }
     }
 
     // Describe a single limitbreak.

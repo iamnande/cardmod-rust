@@ -12,6 +12,13 @@ pub enum Error {
     NotFound,
 }
 
+// Default repository.
+impl Default for Repository {
+    fn default() -> Self {
+        Repository::new()
+    }
+}
+
 // Repository implementation.
 impl Repository {
     // Creates a new instance of a card repository.
@@ -125,7 +132,7 @@ impl Repository {
             Card::new("Seifer".to_string(), Level::Ten),
             Card::new("Squall".to_string(), Level::Ten),
         ];
-        Self { cards: cards }
+        Self { cards }
     }
 
     // Describe a single card.

@@ -63,20 +63,15 @@ pub fn new() -> Config {
     };
 
     // new: load server port
-    let server_port;
     let res = env::var(format!("{}SERVER_PORT", ENV_PREFIX));
-    match res {
-        Ok(port) => {
-            server_port = port;
-        }
-        _ => {
-            server_port = DEFAULT_SERVER_PORT.to_string();
-        }
+    let server_port = match res {
+        Ok(port) => port,
+        _ => DEFAULT_SERVER_PORT.to_string(),
     };
 
     // new: return constructed
     Config {
-        environment: environment,
+        environment,
         server: Server { port: server_port },
     }
 }

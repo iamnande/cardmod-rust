@@ -17,12 +17,12 @@ BIN_DIR   := $(APP_WORKDIR)/bin
 BUILD_DIR := $(APP_WORKDIR)/target
 
 .PHONY: build-clean
-build-clean: ## build: clean build workspace
+build-clean: ## build: clean the build workspace
 	@echo $(APP_LOG_FMT) "cleaning build workspace"
 	@rm -rf $(BUILD_DIR) $(BIN_DIR)
 
 .PHONY: build-binary
-build-binary: build-clean ## build: build release binary file
+build-binary: build-clean ## build: build a release binary file
 	@echo $(APP_LOG_FMT) "building release binary"
 	@cargo b --release
 	@mkdir $(BIN_DIR) \
@@ -33,6 +33,11 @@ build-binary: build-clean ## build: build release binary file
 # --------------------------------------------------
 
 .PHONY: test-lint
-test-lint: ## test: checking for lint failures
-	@echo $(APP_LOG_FMT) "building debug binary"
+test-lint: ## test: check for lint failures
+	@echo $(APP_LOG_FMT) "checking for lint failures"
 	@find . -type f -name "*.rs" -exec rustfmt -v '{}' +
+
+.PHONY: test-clippy
+test-clippy: ## test: check for clippy suggestions
+	@echo $(APP_LOG_FMT) "checking for clippy suggestions"
+	@cargo clippy --workspace --all-features
