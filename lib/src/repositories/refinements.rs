@@ -176,7 +176,7 @@ impl Repository {
     }
 
     // List the refinements available.
-    pub fn list(&self, filter: Option<String>) -> Vec<Refinement> {
+    fn list(&self, filter: Option<String>) -> Vec<Refinement> {
         // list: initialize refinements output
         let mut results: Vec<Refinement> = Vec::new();
 
