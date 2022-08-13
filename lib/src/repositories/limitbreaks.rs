@@ -17,21 +17,21 @@ impl Repository {
     // Creates a new instance of a limitbreak repository.
     pub fn new() -> Self {
         let limitbreaks: [LimitBreak; 15] = [
-            LimitBreak::new("Ultra Waves"),
-            LimitBreak::new("Electrocute"),
-            LimitBreak::new("L?Death"),
-            LimitBreak::new("Degenerator"),
-            LimitBreak::new("Aqua Breath"),
-            LimitBreak::new("Micro Missiles"),
-            LimitBreak::new("Acid"),
-            LimitBreak::new("Gatling Gun"),
-            LimitBreak::new("Fire Breath"),
-            LimitBreak::new("Bad Breath"),
-            LimitBreak::new("White Wind"),
-            LimitBreak::new("Homing Laser"),
-            LimitBreak::new("Mighty Guard"),
-            LimitBreak::new("Ray-Bomb"),
-            LimitBreak::new("Shockwave Pulsar"),
+            LimitBreak::new("Ultra Waves".to_string()),
+            LimitBreak::new("Electrocute".to_string()),
+            LimitBreak::new("L?Death".to_string()),
+            LimitBreak::new("Degenerator".to_string()),
+            LimitBreak::new("Aqua Breath".to_string()),
+            LimitBreak::new("Micro Missiles".to_string()),
+            LimitBreak::new("Acid".to_string()),
+            LimitBreak::new("Gatling Gun".to_string()),
+            LimitBreak::new("Fire Breath".to_string()),
+            LimitBreak::new("Bad Breath".to_string()),
+            LimitBreak::new("White Wind".to_string()),
+            LimitBreak::new("Homing Laser".to_string()),
+            LimitBreak::new("Mighty Guard".to_string()),
+            LimitBreak::new("Ray-Bomb".to_string()),
+            LimitBreak::new("Shockwave Pulsar".to_string()),
         ];
         Self {
             limitbreaks: limitbreaks,
@@ -39,7 +39,7 @@ impl Repository {
     }
 
     // Describe a single limitbreak.
-    pub fn describe(&self, name: &str) -> Result<LimitBreak, Error> {
+    pub fn describe(&self, name: String) -> Result<LimitBreak, Error> {
         let mut limitbreak: Option<LimitBreak> = None;
         for c in self.limitbreaks.clone() {
             if c.name == name {
