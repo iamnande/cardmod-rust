@@ -1,6 +1,5 @@
 use serde::{Deserialize, Serialize};
 use std::fmt::{self, Debug};
-use uuid::Uuid;
 
 // Item purpose enumerated values.
 #[derive(Serialize, Deserialize, Debug, Clone, Copy)]
@@ -52,7 +51,6 @@ impl fmt::Display for Purpose {
 // A item.
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Item {
-    pub id: String,
     pub name: String,
     pub purpose: Purpose,
 }
@@ -61,7 +59,6 @@ pub struct Item {
 impl Item {
     // Creates a new instance of a item.
     pub fn new(name: String, purpose: Purpose) -> Self {
-        let id = Uuid::new_v4().to_string();
-        Self { id, name, purpose }
+        Self { name, purpose }
     }
 }

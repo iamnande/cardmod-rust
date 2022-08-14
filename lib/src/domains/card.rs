@@ -1,6 +1,5 @@
 use serde::{Deserialize, Serialize};
 use std::fmt::{self, Debug};
-use uuid::Uuid;
 
 // Magic purpose enumerated values.
 #[derive(Serialize, Deserialize, Debug, Clone, Copy)]
@@ -37,7 +36,6 @@ impl fmt::Display for Level {
 // A card.
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Card {
-    pub id: String,
     pub name: String,
     pub level: Level,
 }
@@ -46,7 +44,6 @@ pub struct Card {
 impl Card {
     // Creates a new instance of a card.
     pub fn new(name: String, level: Level) -> Self {
-        let id = Uuid::new_v4().to_string();
-        Self { id, name, level }
+        Self { name, level }
     }
 }
