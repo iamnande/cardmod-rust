@@ -1,6 +1,5 @@
 use serde::{Deserialize, Serialize};
 use std::fmt::{self, Debug};
-use uuid::Uuid;
 
 // Magic purpose enumerated values.
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -19,7 +18,6 @@ impl fmt::Display for Purpose {
 // A magic.
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Magic {
-    pub id: String,
     pub name: String,
     pub purpose: Purpose,
 }
@@ -28,7 +26,6 @@ pub struct Magic {
 impl Magic {
     // Creates a new instance of a magic.
     pub fn new(name: String, purpose: Purpose) -> Self {
-        let id = Uuid::new_v4().to_string();
-        Self { id, name, purpose }
+        Self { name, purpose }
     }
 }
