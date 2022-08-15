@@ -1,9 +1,10 @@
 use crate::domains::card::{Card, Level};
+use serde::{Deserialize, Serialize};
 
 // The card repository.
-#[derive(Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Repository {
-    cards: [Card; 107],
+    cards: Vec<Card>,
 }
 
 // Repository enumerated errors.
@@ -23,7 +24,7 @@ impl Default for Repository {
 impl Repository {
     // Creates a new instance of a card repository.
     pub fn new() -> Self {
-        let cards: [Card; 107] = [
+        let cards = vec![
             Card::new("Geezard".to_string(), Level::One),
             Card::new("Funguar".to_string(), Level::One),
             Card::new("Bite Bug".to_string(), Level::One),
@@ -151,7 +152,7 @@ impl Repository {
 
     // List the cards available.
     // TODO: search filter?
-    pub fn list(&self) -> [Card; 107] {
+    pub fn list(&self) -> Vec<Card> {
         self.cards.clone()
     }
 }

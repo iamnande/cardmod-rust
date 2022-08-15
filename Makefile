@@ -35,7 +35,7 @@ build-binary: build-clean ## build: build a release binary file
 .PHONY: test-lint
 test-lint: ## test: check for lint failures
 	@echo $(APP_LOG_FMT) "checking for lint failures"
-	@find . -type f -name "*.rs" -exec rustfmt -v '{}' +
+	@find . -type f -name "*.rs" -exec rustfmt -v --edition 2021 '{}' +
 
 .PHONY: test-clippy
 test-clippy: ## test: check for clippy suggestions
