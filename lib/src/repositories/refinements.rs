@@ -241,9 +241,8 @@ impl Repository {
                     quantity: child_quantity,
                     refinements: None,
                 }];
-                match result.refinements {
-                    Some(_) => result.refinements = Some(child_result),
-                    None => (),
+                if result.refinements.is_some() {
+                    result.refinements = Some(child_result);
                 }
             }
 

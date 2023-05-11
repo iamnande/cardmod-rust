@@ -51,10 +51,10 @@ impl Repository {
                 limitbreak = Some(c)
             }
         }
-        match limitbreak {
-            Some(limitbreak) => Ok(limitbreak),
-            None => Err(Error::NotFound),
+        if let Some(limitbreak) = limitbreak {
+            return Ok(limitbreak);
         }
+        Err(Error::NotFound)
     }
 
     // List the limitbreaks available.
